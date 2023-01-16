@@ -6,46 +6,52 @@
 /*   By: cvan-vli <cvan-vli@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/10 14:41:35 by cvan-vli      #+#    #+#                 */
-/*   Updated: 2023/01/11 17:36:02 by cvan-vli      ########   odam.nl         */
+/*   Updated: 2023/01/16 15:42:01 by cvan-vli      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include 
+#include "get_next_line.h"
 
-char	*concatenate(char *fin_str, char *buf_str, int fin_size, int buf_size)
+char	*join_buffs(char *static_buffer, char *buffer)
 {
+	char	*new_line;
+	int		i;
+
+	i = 0;
+	new_line = malloc((ft_strlen(buffer) + ft_strlen(static_buffer))
+			*sizeof(char *))
+	while (buffer || static_buffer)
+	{
+		new_line[i] = static_buffer;
+	}
 	return (0);
 }
 
-char	*get_next_line(int fd)
+char	*read_buffs(char *static_buffer, int fd)
 {
-	char			*buffer;
-	static char		*final_str;
-	ssize_t			bytes_read;
+	char	*buffer;
+	int		bytes_read;
 
-	if (fd < 0)
-		return (NULL);
 	buffer = malloc((BUFFER_SIZE + 1) * sizeof(char *));
 	if (!buffer)
 		return (NULL);
-	while (buffer[i] != '\n')
+	while (!ft_strchr(buffer, "\n"))
 	{
 		bytes_read = read(fd, buffer, BUFFER_SIZE);
 		if (bytes_read == -1)
 			return (NULL);
 		if (bytes_read == 0)
 			break ;
-		i++;
+		buffer[bytes_read] = '\0';
+		static_buffer = ft_strjoin(static_buffer, buffer);
 	}
-	final_str = concatenate;
 }
 
-int	main(void)
+char	*get_next_line(int fd)
 {
-	int		fd;
-	char	*str;
+	static char	*static_buffer;
 
-	fd = open("text.txt", 0_RONLY);
-	str = get_next_line(fd);
+	if (fd < 0 || BUFFER_SIZE <= 0)
+		return (NULL);
+	static_buffer = read_buffs(static_buffer, fd);
 }
