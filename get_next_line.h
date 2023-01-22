@@ -6,7 +6,7 @@
 /*   By: cvan-vli <cvan-vli@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/16 15:38:11 by cvan-vli      #+#    #+#                 */
-/*   Updated: 2023/01/16 15:41:25 by cvan-vli      ########   odam.nl         */
+/*   Updated: 2023/01/18 16:23:24 by cvan-vli      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,10 @@
 # include <stdio.h>
 # include <unistd.h>
 
-int		ft_strlen(const char *str);
-char	*ft_strjoin(char const *s1, char const *s2);
-size_t	ft_strlcat(char *dst, const char *src, size_t size);
-size_t	ft_strlcpy(char *dest, const char *src, size_t dstsize);
+char	*read_buffs(char *static_buffer, int fd);
+char	*get_next_line(int fd);
+int		ft_strlen(char *str);
+char	*str_join(char *s1, char *s2);
+char	ft_strchr(char *s, char c);
 
 #endif

@@ -6,83 +6,62 @@
 /*   By: cvan-vli <cvan-vli@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/16 11:36:10 by cvan-vli      #+#    #+#                 */
-/*   Updated: 2023/01/16 15:41:51 by cvan-vli      ########   odam.nl         */
+/*   Updated: 2023/01/22 11:57:51 by cvan-vli      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int	ft_strlen(const char *str)
+int	ft_strlen(char *str)
 {
 	int	i;
 
 	i = 0;
+	if (!str)
+		return (0);
 	while (str[i])
-	{
 		i++;
-	}
 	return (i);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*str_join(char *s1, char *s2)
 {
-	char	*new_string;
+	int		i;
+	int		j;
+	char	*s3;
 
-	new_string = malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
-	if (new_string == NULL)
-	{
+	if (!s1)
+		s1 = (char *)malloc(1 * sizeof(char));
+	if (!s1 || !s2)
 		return (NULL);
-	}
-	ft_strlcpy(new_string, s1, (ft_strlen(s1) + 1));
-	ft_strlcat(new_string, s2, (ft_strlen(s1) + ft_strlen(s2) + 1));
-	return (new_string);
+	s3 = malloc((ft_strlen(s1) + ft_strlen(s2) + 1));
+	if (!s3)
+		return (NULL);
+	i = -1;
+	while (s1[++i] != '\0')
+		s3[i] = s1[i];
+	j = 0;
+	while (s2[j])
+		s3[i++] = s2[j++];
+	s3[ft_strlen(s1) + ft_strlen(s2)] = '\0';
+	free(s1);
+	return (s3);
 }
 
-size_t	ft_strlcat(char *dst, const char *src, size_t size)
+char	ft_strchr(char *s, char c)
 {
-	size_t		i;
-	size_t		dst_len;
-	size_t		src_len;
+	int	i;
 
 	i = 0;
-	dst_len = ft_strlen(dst);
-	src_len = ft_strlen(src);
-	if (dst_len >= size)
+	if (!s)
+		return (0);
+	if (c == '\0')
+		return (*s + ft_strlen(s));
+	while (s[i])
 	{
-		return (size + src_len);
-	}
-	while (dst_len < size - 1 && src[i])
-	{
-		dst[dst_len] = src[i];
-		dst_len++;
+		if (s[i] == c)
+			return (1);
 		i++;
 	}
-	dst[dst_len] = '\0';
-	return (src_len + (ft_strlen(dst) - i));
-}
-
-size_t	ft_strlcpy(char *dest, const char *src, size_t dstsize)
-{
-	unsigned int	i;
-
-	i = 0;
-	if (dstsize == 0)
-	{
-		return (ft_strlen(src));
-	}
-	while (i < (dstsize - 1) && src[i])
-	{
-		dest[i] = src[i];
-		i++;
-	}
-	dest[i] = '\0';
-	return (ft_strlen(src));
-}
-
-int	main(void)
-{
-	char *s1 = "Hallo";
-	char *s2 = "Doei";
-
-	printf("%s", ft_strjoin(s1, s2));
+	return (0);
 }
