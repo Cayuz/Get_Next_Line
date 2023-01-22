@@ -6,15 +6,13 @@
 /*   By: cvan-vli <cvan-vli@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/10 14:41:35 by cvan-vli      #+#    #+#                 */
-/*   Updated: 2023/01/22 12:18:00 by cvan-vli      ########   odam.nl         */
+/*   Updated: 2023/01/22 12:55:38 by cvan-vli      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include <fcntl.h>
 #include <stdlib.h>
-
-int	BUFFER_SIZE = 1;
 
 char	*a_nl(char *static_buffer)
 {
@@ -100,7 +98,7 @@ int	main(void)
 	int		fd;
 	int		i;
 
-	i = 0;
+	i = 1;
 	fd = open("text.txt", O_RDONLY);
 	str = get_next_line(fd);
 	while (i < BUFFER_SIZE)

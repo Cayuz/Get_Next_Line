@@ -6,12 +6,16 @@
 /*   By: cvan-vli <cvan-vli@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/16 15:38:11 by cvan-vli      #+#    #+#                 */
-/*   Updated: 2023/01/18 16:23:24 by cvan-vli      ########   odam.nl         */
+/*   Updated: 2023/01/22 12:55:31 by cvan-vli      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 1
+# endif
 
 # include <stdlib.h>
 # include <stdio.h>
