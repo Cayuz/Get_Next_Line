@@ -6,7 +6,7 @@
 /*   By: cavan-vl <cavan-vl@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/30 16:16:37 by cavan-vl      #+#    #+#                 */
-/*   Updated: 2023/12/07 15:35:33 by cavan-vl      ########   odam.nl         */
+/*   Updated: 2023/12/07 19:58:23 by cavan-vl      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,4 +27,16 @@ void	*ft_calloc(size_t nmemb, size_t size)
 		i++;
 	}
 	return(ptr);
+}
+
+t_list	*ft_lstlast(t_list *lst)
+{
+	t_list	*temp;
+
+	if (lst == NULL)
+		return (NULL);
+	temp = lst;
+	while (temp->next)
+		temp = temp->next;
+	return (temp);
 }

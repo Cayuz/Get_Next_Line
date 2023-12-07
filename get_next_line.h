@@ -6,7 +6,7 @@
 /*   By: cavan-vl <cavan-vl@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/23 14:30:36 by cavan-vl      #+#    #+#                 */
-/*   Updated: 2023/12/07 18:09:16 by cavan-vl      ########   odam.nl         */
+/*   Updated: 2023/12/07 19:55:48 by cavan-vl      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@
 
 typedef struct s_list
 {
-	char			*buffer;
+	char			*line;
 	struct s_list	*next;
 }				t_list;
+
+int		find_newline(t_list *list);
+void	create_list(t_list **list, int fd);
