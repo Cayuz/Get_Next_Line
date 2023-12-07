@@ -6,7 +6,7 @@
 /*   By: cavan-vl <cavan-vl@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/23 14:01:48 by cavan-vl      #+#    #+#                 */
-/*   Updated: 2023/11/30 16:16:16 by cavan-vl      ########   odam.nl         */
+/*   Updated: 2023/12/07 17:07:29 by cavan-vl      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,12 @@
 
 char	*get_next_line(int fd)
 {
-	char	*line;
+	static char	*buffer;
 
-	if (fd < 0 | BUFFERSIZE < 0)
+	if (fd < 0 || BUFFERSIZE <= 0)
+	{
+		free(buffer);
+		buffer = NULL;
 		return (NULL);
-	line = ft_calloc()
+	}
 }
