@@ -6,15 +6,19 @@
 /*   By: cavan-vl <cavan-vl@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/23 14:01:48 by cavan-vl      #+#    #+#                 */
-/*   Updated: 2023/12/07 20:09:38 by cavan-vl      ########   odam.nl         */
+/*   Updated: 2023/12/09 12:44:33 by cavan-vl      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-// fetch next line
+char	*fetch_line(t_list *list)
 {
-	int	
+	int		len_to_newline;
+	char	*line;
+
+	len_to_newline = find_newline(list);
+	line = malloc(len_to_newline + 1);
 }
 
 void	append_node(t_list **list, char *buffer)
