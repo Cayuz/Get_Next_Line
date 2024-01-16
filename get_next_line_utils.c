@@ -6,7 +6,7 @@
 /*   By: cavan-vl <cavan-vl@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/30 16:16:37 by cavan-vl      #+#    #+#                 */
-/*   Updated: 2024/01/16 15:26:15 by cavan-vl      ########   odam.nl         */
+/*   Updated: 2024/01/16 18:15:00 by cavan-vl      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,80 +19,37 @@ t_list	*ft_lstlast(t_list *lst)
 	return (lst);
 }
 
-void	copy_string(t_list	*list, char *buffer, int check)
+void	copy_string(t_list *list, char *buffer, int size)
 {
 	int	i;
 	int	j;
 
-	if (!list)
+	if (list == NULL)
 		return ;
 	j = 0;
 	while (list)
 	{
 		i = 0;
-		while (buffer[i])
+		while(buffer[i] != '\0' && i < size)
 		{
-			if (check)
-			{
-				if (buffer[i] == '\n')
-				{
-					list->line[j++] = '\n';
-					list->line[j] = '\0';
-					return ;
-				}
-			}
-			list->line[j++] = buffer[i++];
+			if (buffer[i] == '\n')
+				list->line[i] = buffer[i];
+			i++;
 		}
-		list->line[j] = '\0';
-		list = list->next;
+		list->line[]
 	}
 }
 
-// void	copy_string(t_list	*list, char *line, int check)
-// {
-// 	int	i;
-// 	int	j;
-
-// 	if (!list)
-// 		return ;
-// 	j = 0;
-// 	while (list)
-// 	{
-// 		i = 0;
-// 		while (list->line[i])
-// 		{
-// 			if (check)
-// 			{
-// 				if (list->line[i] == '\n')
-// 				{
-// 					line[j++] = '\n';
-// 					line[j] = '\0';
-// 					return ;
-// 				}
-// 			}
-// 			line[j++] = list->line[i++];
-// 		}
-// 		list = list->next;
-// 	}
-// 	line[j] = '\0';
-// }
-
-int	find_nl(t_list *list) // <- string?
+int	find_nl(char *string)
 {
 	int	i;
 
-	if (!list)
-		return (0);
 	i = 0;
-	while (list)
+	while (string[i] != '\0')
 	{
-		while (list->line[i] && i < BUFFER_SIZE)
-		{
-				if (list->line[i] == '\n')
-					return(i);
-			i++;
-		}
-		list = list->next;
+		if (string[i] == '\n')
+			return (i);
+		i++;
 	}
 	return (-1);
 }
@@ -118,25 +75,4 @@ int	len_nl(t_list *list)
 		list = list->next;
 	}
 	return (len);
-}
-
-void	dealloc(t_list **list, t_list *clean_node, char *buf)
-{
-	t_list	*tmp;
-
-	if (!*list)
-		return ;
-	while (*list)
-	{
-		tmp = (*list)->next;
-		free(*list);
-		*list = tmp;
-	}
-	if (clean_node->line[0])
-		*list = clean_node;
-	else
-	{
-		free(buf);
-		free(clean_node);
-	}
 }

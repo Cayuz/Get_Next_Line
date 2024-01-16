@@ -6,7 +6,7 @@
 /*   By: cavan-vl <cavan-vl@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/23 14:30:36 by cavan-vl      #+#    #+#                 */
-/*   Updated: 2024/01/16 15:13:53 by cavan-vl      ########   odam.nl         */
+/*   Updated: 2024/01/16 17:53:08 by cavan-vl      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,11 @@ typedef struct s_list
 }				t_list;
 
 int		len_nl(t_list *list);
-int		make_list(t_list **list, int fd, char *buffer);
+t_list	*make_list(t_list *list, int fd, char *buffer);
 t_list	*ft_lstlast(t_list *lst);
-void	copy_string(t_list	*list, char *line, int check);
+void	copy_string(t_list *list, char *buffer, int size);
 void	append_node(t_list **list, char *buffer);
-int		find_nl(t_list *list);
+int		find_nl(char *string);
 void	clean_up(t_list **list);
 char	*fetch_line(t_list *list);
 char	*get_next_line(int fd);
