@@ -6,27 +6,20 @@
 /*   By: cavan-vl <cavan-vl@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/11/30 16:16:37 by cavan-vl      #+#    #+#                 */
-/*   Updated: 2023/12/15 17:56:59 by cavan-vl      ########   odam.nl         */
+/*   Updated: 2024/01/16 15:26:15 by cavan-vl      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include <stdio.h>
 
 #include "get_next_line.h"
 
 t_list	*ft_lstlast(t_list *lst)
 {
-	t_list	*temp;
-
-	if (!lst)
-		return (NULL);
-	temp = lst;
-	while (temp->next)
-		temp = temp->next;
-	return (temp);
+	while (lst != NULL && lst->next)
+		lst = lst->next;
+	return (lst);
 }
 
-void	copy_string(t_list	*list, char *line)
+void	copy_string(t_list	*list, char *buffer, int check)
 {
 	int	i;
 	int	j;
@@ -37,71 +30,113 @@ void	copy_string(t_list	*list, char *line)
 	while (list)
 	{
 		i = 0;
-		while (list->line[i])
+		while (buffer[i])
 		{
-			if (list->line[i] == '\n')
+			if (check)
 			{
-				line[j++] = '\n';
-				line[j] = '\0';
-				return ;
+				if (buffer[i] == '\n')
+				{
+					list->line[j++] = '\n';
+					list->line[j] = '\0';
+					return ;
+				}
 			}
-			line[j++] = list->line[i++];
+			list->line[j++] = buffer[i++];
 		}
+		list->line[j] = '\0';
 		list = list->next;
 	}
-	line[j] = '\0';
 }
 
-void	append_node(t_list **list, char *buffer)
-{
-	t_list	*last_node;
-	t_list	*new_node;
+// void	copy_string(t_list	*list, char *line, int check)
+// {
+// 	int	i;
+// 	int	j;
 
-	new_node = malloc(sizeof(t_list));
-	if (!new_node || !list)
-		return ;
-	last_node = ft_lstlast(*list);
-	if (!last_node)
-		*list = new_node;
-	else
-		last_node->next = new_node;
-	new_node->line = buffer;
-	new_node->next = NULL;
-}
+// 	if (!list)
+// 		return ;
+// 	j = 0;
+// 	while (list)
+// 	{
+// 		i = 0;
+// 		while (list->line[i])
+// 		{
+// 			if (check)
+// 			{
+// 				if (list->line[i] == '\n')
+// 				{
+// 					line[j++] = '\n';
+// 					line[j] = '\0';
+// 					return ;
+// 				}
+// 			}
+// 			line[j++] = list->line[i++];
+// 		}
+// 		list = list->next;
+// 	}
+// 	line[j] = '\0';
+// }
 
-int	find_newline(t_list *list)
+int	find_nl(t_list *list) // <- string?
 {
 	int	i;
 
-	if (NULL == list)
+	if (!list)
 		return (0);
-	if (list->next)
-		list = list->next;
+	i = 0;
 	while (list)
 	{
-		i = 0;
 		while (list->line[i] && i < BUFFER_SIZE)
 		{
-			if (list->line[i] == '\n')
-				return (1);
-			++i;
+				if (list->line[i] == '\n')
+					return(i);
+			i++;
 		}
 		list = list->next;
 	}
-	return (0);
+	return (-1);
 }
 
-void	free_list(t_list *list)
+int	len_nl(t_list *list) 
 {
-	t_list	*current;
+	int	i;
+	int	len;
 
-	current = list;
-	while (current)
+	if (!list)
+		return (0);
+	len = 0;
+	while (list)
 	{
+		i = 0;
+		while (list->line[i])
+		{
+			if (list->line[i] == '\n')
+				return (len + 1);
+			len++;
+			i++;
+		}
 		list = list->next;
-		free(current->line);
-		free(current);
-		current = list;
+	}
+	return (len);
+}
+
+void	dealloc(t_list **list, t_list *clean_node, char *buf)
+{
+	t_list	*tmp;
+
+	if (!*list)
+		return ;
+	while (*list)
+	{
+		tmp = (*list)->next;
+		free(*list);
+		*list = tmp;
+	}
+	if (clean_node->line[0])
+		*list = clean_node;
+	else
+	{
+		free(buf);
+		free(clean_node);
 	}
 }
-
