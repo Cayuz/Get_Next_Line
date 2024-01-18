@@ -6,7 +6,7 @@
 /*   By: cvan-vli <cvan-vli@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/10 14:41:35 by cvan-vli      #+#    #+#                 */
-/*   Updated: 2024/01/18 18:43:05 by cavan-vl      ########   odam.nl         */
+/*   Updated: 2024/01/18 18:52:23 by cavan-vl      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,8 @@ char	*get_next_line(int fd)
 	result = b_nl(static_buffer);
 	if (ft_strlen(result) == 0)
 	{
+		free(static_buffer);
+		static_buffer = 0;
 		if (result)
 			free(result);
 		return (NULL);
@@ -114,23 +116,23 @@ char	*get_next_line(int fd)
 	return (result);
 }
 
-int	main(void)
-{
-	char	*str;
-	int		fd;
-	int		i;
-	int		j;
+// int	main(void)
+// {
+// 	char	*str;
+// 	int		fd;
+// 	int		i;
+// 	int		j;
 
-	j = 1;
-	i = 0;
-	fd = open("text.txt", O_RDONLY);
-	str = get_next_line(fd);
-	while (str)
-	{
-		write(1, str, ft_strlen(str));
-		free(str);
-		str = get_next_line(fd);
-		j++;
-		i++;
-	}
-}
+// 	j = 1;
+// 	i = 0;
+// 	fd = open("text.txt", O_RDONLY);
+// 	str = get_next_line(fd);
+// 	while (str)
+// 	{
+// 		write(1, str, ft_strlen(str));
+// 		free(str);
+// 		str = get_next_line(fd);
+// 		j++;
+// 		i++;
+// 	}
+// }
