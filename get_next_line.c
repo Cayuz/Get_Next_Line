@@ -6,7 +6,7 @@
 /*   By: cvan-vli <cvan-vli@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/10 14:41:35 by cvan-vli      #+#    #+#                 */
-/*   Updated: 2024/01/18 18:10:12 by cavan-vl      ########   odam.nl         */
+/*   Updated: 2024/01/18 18:43:05 by cavan-vl      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,7 @@ char	*a_nl(char *static_buffer)
 		i++;
 	new_line = ft_calloc(((ft_strlen(static_buffer) - i) + 1), sizeof(char));
 	if (!new_line)
-	{
-		// free(static_buffer);
 		return (NULL);
-	}
 	i++;
 	while (i < ft_strlen(static_buffer) && static_buffer[i])
 		new_line[j++] = static_buffer[i++];
@@ -93,21 +90,19 @@ char	*read_buffs(char *static_buffer, int fd)
 
 char	*get_next_line(int fd)
 {
-	// static char	static_buffer[BUFFER_SIZE + 1];
-	static char	*static_buffer;
+	static char	*static_buffer = NULL;
 	char		*result;
-	
+
 	if (!static_buffer)
 		static_buffer = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
 	if (fd < 0 || fd > FOPEN_MAX || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
 	{
 		if (static_buffer)
 			free(static_buffer);
+		static_buffer = 0;
 		return (NULL);
 	}
 	static_buffer = read_buffs(static_buffer, fd);
-	// if (!static_buffer)
-	// 	return (NULL);
 	result = b_nl(static_buffer);
 	if (ft_strlen(result) == 0)
 	{
@@ -119,25 +114,23 @@ char	*get_next_line(int fd)
 	return (result);
 }
 
-// int	main(void)
-// {
-// 	char	*str;
-// 	int		fd;
-// 	int		i;
-// 	int		j;
+int	main(void)
+{
+	char	*str;
+	int		fd;
+	int		i;
+	int		j;
 
-// 	j = 1;
-// 	i = 0;
-// 	// printf("here\n");
-// 	fd = open("text.txt", O_RDONLY);
-// 	str = get_next_line(fd);
-// 	while (str)
-// 	{
-// 		write(1, str, ft_strlen(str));
-// 		free(str);
-// 		str = get_next_line(fd);
-// 		// printf("%d: %s", j, str);
-// 		j++;
-// 		i++;
-// 	}
-// }
+	j = 1;
+	i = 0;
+	fd = open("text.txt", O_RDONLY);
+	str = get_next_line(fd);
+	while (str)
+	{
+		write(1, str, ft_strlen(str));
+		free(str);
+		str = get_next_line(fd);
+		j++;
+		i++;
+	}
+}
