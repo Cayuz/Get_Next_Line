@@ -6,7 +6,7 @@
 /*   By: cvan-vli <cvan-vli@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/16 11:36:10 by cvan-vli      #+#    #+#                 */
-/*   Updated: 2024/01/18 16:59:39 by cavan-vl      ########   odam.nl         */
+/*   Updated: 2024/01/18 17:26:52 by cavan-vl      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,21 +71,36 @@ void	*ft_calloc(size_t nmemb, size_t size)
 	return (p);
 }
 
-char	ft_strchr(char *s, char c)
+int	ft_strchr(char *s)
 {
 	int	i;
 
 	i = 0;
 	if (!s)
 		return (0);
-	if (c == '\0')
-		return (*s + ft_strlen(s));
 	while (s[i])
 	{
-		if (s[i] == c)
+		if (s[i] == '\n')
 			return (1);
 		i++;
 	}
 	return (0);
 }
 
+// char	ft_strchr(char *s, char c)
+// {
+// 	int	i;
+
+// 	i = 0;
+// 	if (!s)
+// 		return (0);
+// 	if (c == '\0')
+// 		return (*s + ft_strlen(s));
+// 	while (s[i])
+// 	{
+// 		if (s[i] == c)
+// 			return (1);
+// 		i++;
+// 	}
+// 	return (0);
+// }

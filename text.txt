@@ -1,46 +1,9 @@
-"hoi\ndoei\nhoi\0"
-
-BUFFER_SIZE = 4
-
-read round 1:	"hoi\n"
-round 2:		"doei"
-round 3:		"\nhoi"
-round 4:		"\0"
-
-round 2:
-
-	make_list:
-
-		PRE READ buffer = "hoi\n\0"
-		
-		AFTER READ buffer = "hoi\ndoei\0"
-
-	append_node:
+abc
+defgh
+		ijkl
 
 
-
-round 1:
-
-	append_node:
-
-		buffer = "hoi\n\0"
-
-		list = new_node
-
-		list->line = "hoi\n\0"
-
-		list->next = NULL
-
-	make_list:
-
-		find_nl != -1 (want \n in buffer)
-
-		return list 
-
-	get_next_line:
-
-		list = node->line = "hoi\n\0"
-
-	fetch_line:
-
-		line = "hoi\n\0"
+  m n o p
+qr st 		u
+233
+vw09xyz

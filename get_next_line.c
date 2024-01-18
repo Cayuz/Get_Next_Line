@@ -6,7 +6,7 @@
 /*   By: cvan-vli <cvan-vli@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2023/01/10 14:41:35 by cvan-vli      #+#    #+#                 */
-/*   Updated: 2024/01/18 16:59:20 by cavan-vl      ########   odam.nl         */
+/*   Updated: 2024/01/18 18:10:12 by cavan-vl      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*a_nl(char *static_buffer)
 	j = 0;
 	while (static_buffer[i] && static_buffer[i] != '\n')
 		i++;
-	new_line = malloc((ft_strlen(static_buffer) - i) * sizeof(char));
+	new_line = ft_calloc(((ft_strlen(static_buffer) - i) + 1), sizeof(char));
 	if (!new_line)
 	{
 		// free(static_buffer);
@@ -33,7 +33,8 @@ char	*a_nl(char *static_buffer)
 	i++;
 	while (i < ft_strlen(static_buffer) && static_buffer[i])
 		new_line[j++] = static_buffer[i++];
-	new_line[j] = '\0';
+	if (new_line[j] != '\0')
+		new_line[j] = '\0';
 	free(static_buffer);
 	return (new_line);
 }
@@ -73,7 +74,7 @@ char	*read_buffs(char *static_buffer, int fd)
 	buffer = ft_calloc((BUFFER_SIZE + 1), sizeof(char));
 	if (!buffer)
 		return (NULL);
-	while (!ft_strchr(static_buffer, '\n'))
+	while (!ft_strchr(static_buffer))
 	{
 		bytes_read = read(fd, buffer, BUFFER_SIZE);
 		if (bytes_read == -1)
@@ -118,25 +119,25 @@ char	*get_next_line(int fd)
 	return (result);
 }
 
-int	main(void)
-{
-	char	*str;
-	int		fd;
-	int		i;
-	int		j;
+// int	main(void)
+// {
+// 	char	*str;
+// 	int		fd;
+// 	int		i;
+// 	int		j;
 
-	j = 1;
-	i = 0;
-	// printf("here\n");
-	fd = open("text.txt", O_RDONLY);
-	str = get_next_line(fd);
-	while (str)
-	{
-		write(1, str, ft_strlen(str));
-		free(str);
-		str = get_next_line(fd);
-		// printf("%d: %s", j, str);
-		j++;
-		i++;
-	}
-}
+// 	j = 1;
+// 	i = 0;
+// 	// printf("here\n");
+// 	fd = open("text.txt", O_RDONLY);
+// 	str = get_next_line(fd);
+// 	while (str)
+// 	{
+// 		write(1, str, ft_strlen(str));
+// 		free(str);
+// 		str = get_next_line(fd);
+// 		// printf("%d: %s", j, str);
+// 		j++;
+// 		i++;
+// 	}
+// }

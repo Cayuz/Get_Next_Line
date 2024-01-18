@@ -15,7 +15,7 @@
 # define GET_NEXT_LINE_H
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1
+#  define BUFFER_SIZE 10
 # endif
 
 # include <stdlib.h>
@@ -27,7 +27,7 @@ char	*read_buffs(char *static_buffer, int fd);
 char	*get_next_line(int fd);
 int		ft_strlen(char *str);
 char	*str_join(char *s1, char *s2);
-char	ft_strchr(char *s, char c);
+int		ft_strchr(char *s);
 void	*ft_calloc(size_t nmemb, size_t size);
 void	ft_bzero(void *s, size_t n);
 
