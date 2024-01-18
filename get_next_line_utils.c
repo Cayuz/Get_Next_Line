@@ -3,76 +3,89 @@
 /*                                                        ::::::::            */
 /*   get_next_line_utils.c                              :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: cavan-vl <cavan-vl@student.codam.nl>         +#+                     */
+/*   By: cvan-vli <cvan-vli@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/11/30 16:16:37 by cavan-vl      #+#    #+#                 */
-/*   Updated: 2024/01/16 18:15:00 by cavan-vl      ########   odam.nl         */
+/*   Created: 2023/01/16 11:36:10 by cvan-vli      #+#    #+#                 */
+/*   Updated: 2024/01/18 16:59:39 by cavan-vl      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-t_list	*ft_lstlast(t_list *lst)
-{
-	while (lst != NULL && lst->next)
-		lst = lst->next;
-	return (lst);
-}
-
-void	copy_string(t_list *list, char *buffer, int size)
-{
-	int	i;
-	int	j;
-
-	if (list == NULL)
-		return ;
-	j = 0;
-	while (list)
-	{
-		i = 0;
-		while(buffer[i] != '\0' && i < size)
-		{
-			if (buffer[i] == '\n')
-				list->line[i] = buffer[i];
-			i++;
-		}
-		list->line[]
-	}
-}
-
-int	find_nl(char *string)
+int	ft_strlen(char *str)
 {
 	int	i;
 
 	i = 0;
-	while (string[i] != '\0')
+	if (!str)
+		return (0);
+	while (str[i])
+		i++;
+	return (i);
+}
+
+char	*str_join(char *s1, char *s2)
+{
+	int		i;
+	int		j;
+	char	*s3;
+
+	if (!s1)
+		s1 = (char *)malloc(1 * sizeof(char));
+	if (!s1 || !s2)
+		return (NULL);
+	s3 = malloc((ft_strlen(s1) + ft_strlen(s2) + 1));
+	if (!s3)
+		return (NULL);
+	i = -1;
+	while (s1[++i] != '\0')
+		s3[i] = s1[i];
+	j = 0;
+	while (s2[j])
+		s3[i++] = s2[j++];
+	s3[ft_strlen(s1) + ft_strlen(s2)] = '\0';
+	free(s1);
+	return (s3);
+}
+
+void	ft_bzero(void *s, size_t n)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < n)
 	{
-		if (string[i] == '\n')
-			return (i);
+		((char *)s)[i] = '\0';
 		i++;
 	}
-	return (-1);
 }
 
-int	len_nl(t_list *list) 
+void	*ft_calloc(size_t nmemb, size_t size)
+{
+	void	*p;
+
+	p = malloc(nmemb * size);
+	if (p == NULL)
+		return (NULL);
+	ft_bzero(p, nmemb * size);
+	return (p);
+}
+
+char	ft_strchr(char *s, char c)
 {
 	int	i;
-	int	len;
 
-	if (!list)
+	i = 0;
+	if (!s)
 		return (0);
-	len = 0;
-	while (list)
+	if (c == '\0')
+		return (*s + ft_strlen(s));
+	while (s[i])
 	{
-		i = 0;
-		while (list->line[i])
-		{
-			if (list->line[i] == '\n')
-				return (len + 1);
-			len++;
-			i++;
-		}
-		list = list->next;
+		if (s[i] == c)
+			return (1);
+		i++;
 	}
-	return (len);
+	return (0);
 }
+

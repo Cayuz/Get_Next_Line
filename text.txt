@@ -1,6 +1,4 @@
-hoi
-doei
-hoi
+"hoi\ndoei\nhoi\0"
 
 BUFFER_SIZE = 4
 
@@ -15,7 +13,11 @@ round 2:
 
 		PRE READ buffer = "hoi\n\0"
 		
-		AFTER READ buffer = "hoi\n
+		AFTER READ buffer = "hoi\ndoei\0"
+
+	append_node:
+
+
 
 round 1:
 

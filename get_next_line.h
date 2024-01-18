@@ -1,12 +1,13 @@
+
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
 /*   get_next_line.h                                    :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: cavan-vl <cavan-vl@student.codam.nl>         +#+                     */
+/*   By: cvan-vli <cvan-vli@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2023/11/23 14:30:36 by cavan-vl      #+#    #+#                 */
-/*   Updated: 2024/01/16 17:53:08 by cavan-vl      ########   odam.nl         */
+/*   Created: 2023/01/16 15:38:11 by cvan-vli      #+#    #+#                 */
+/*   Updated: 2024/01/17 20:35:06 by cavan-vl      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,33 +15,20 @@
 # define GET_NEXT_LINE_H
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 10
+#  define BUFFER_SIZE 1
 # endif
 
-# include <fcntl.h>
 # include <stdlib.h>
-# include <unistd.h>
 # include <stdio.h>
+# include <unistd.h>
+# include <limits.h>
 
-#define ERROR -1
-#define SUCCESS 0
-
-typedef struct s_list
-{
-	char			line[BUFFER_SIZE + 1];
-	struct s_list	*next;
-}				t_list;
-
-int		len_nl(t_list *list);
-t_list	*make_list(t_list *list, int fd, char *buffer);
-t_list	*ft_lstlast(t_list *lst);
-void	copy_string(t_list *list, char *buffer, int size);
-void	append_node(t_list **list, char *buffer);
-int		find_nl(char *string);
-void	clean_up(t_list **list);
-char	*fetch_line(t_list *list);
+char	*read_buffs(char *static_buffer, int fd);
 char	*get_next_line(int fd);
-char	*fetch_buffer(t_list *list, char *buffer);
-void	dealloc(t_list **list, t_list *clean_node, char *buf);
+int		ft_strlen(char *str);
+char	*str_join(char *s1, char *s2);
+char	ft_strchr(char *s, char c);
+void	*ft_calloc(size_t nmemb, size_t size);
+void	ft_bzero(void *s, size_t n);
 
 #endif
